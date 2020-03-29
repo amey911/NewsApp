@@ -2,11 +2,15 @@ package com.ez.newsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.ActivityOptions;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 //import android.widget.SearchView;
 
@@ -154,6 +159,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         adapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+
+                ImageView imageView = view.findViewById(R.id.img);
+
+
+
                 Intent intent = new Intent(MainActivity.this, NewsDetailActivity.class);
 
                 Article article = articles.get(position);
@@ -164,7 +174,15 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 intent.putExtra("source", article.getSource().getName());
                 intent.putExtra("author", article.getAuthor());
 
-                startActivity(intent);
+                Pair<View, String> pair = Pair.create((View)imageView, ViewCompat.getTransitionName(imageView));
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        MainActivity.this,
+                        pair
+                );
+
+
+
+                startActivity(intent, optionsCompat.toBundle());
 
             }
         });
