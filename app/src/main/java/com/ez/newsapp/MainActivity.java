@@ -1,5 +1,6 @@
 package com.ez.newsapp;
 
+import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityOptionsCompat;
@@ -27,6 +28,7 @@ import android.widget.LinearLayout;
 
 
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,9 @@ import com.ez.newsapp.Api.ApiClient;
 import com.ez.newsapp.Api.ApiInterface;
 import com.ez.newsapp.Models.Article;
 import com.ez.newsapp.Models.News;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabReselectListener;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +69,79 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+
+
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottom_bar);
+
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(int tabId) {
+
+                if (tabId == R.id.tab_home){
+//                   onLoadingSwipeRefresh("");
+
+//                    topHeadline.setText("Top Headlines");
+
+                }
+
+                else if(tabId == R.id.tab_markets){
+
+                    // inflate market fragment
+
+                  Toast.makeText(MainActivity.this, "open markets window", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (tabId == R.id.tab_watchlist) {
+
+                    // inflate wathlist fragment
+
+                    Toast.makeText(MainActivity.this, "open watchlist window", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
+
+
+
+
+        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
+            @Override
+            public void onTabReSelected(@IdRes int tabId) {
+
+                if (tabId == R.id.tab_home) {
+                    topHeadline.setText("Top Headlines");
+
+
+
+                    onLoadingSwipeRefresh("");
+
+                    Toast.makeText(MainActivity.this, "news refreshed if already in news tab", Toast.LENGTH_SHORT).show();
+                }
+
+                else if (tabId == R.id.tab_markets){
+
+
+                    Toast.makeText(MainActivity.this, "open markets window", Toast.LENGTH_SHORT).show();
+                }
+
+                else if (tabId == R.id.tab_watchlist){
+
+
+
+
+                    Toast.makeText(MainActivity.this, "open watchlist window", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+
+
+
     swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
     swipeRefreshLayout.setOnRefreshListener(this);
     swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
@@ -83,12 +161,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         recyclerView.hasFixedSize();
 
 
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//        recyclerView.setNestedScrollingEnabled(false);
 
 
 
-//        mAdapter = new CountryAdapter(CountryManager.getInstance().getCountries(), R.layout.card_layout, getActivity());
+
 
 
 
@@ -266,6 +342,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                    topHeadline.setText("Search Results For: " +query);
 
                     onLoadingSwipeRefresh(query);
+
                 }
                 return false;
             }

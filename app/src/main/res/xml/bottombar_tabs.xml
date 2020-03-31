@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_home"
+        icon="@drawable/news_icon"
+        title="News" />
+    <tab
+        id="@+id/tab_markets"
+        icon="@drawable/stock_icon"
+        title="Markets" />
+    <tab
+        id="@+id/tab_watchlist"
+        icon="@drawable/watchlist_icon"
+        title="Watchlist" />
+</tabs>
