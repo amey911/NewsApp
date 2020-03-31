@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ActivityOptions;
+import android.app.DownloadManager;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private ImageView errorImage;
     private  TextView errorTitle, errorMessage;
     private Button btnRetry;
+    public String Query = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,8 +117,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     topHeadline.setText("Top Headlines");
 
 
+                onLoadingSwipeRefresh(Query);
 
-                    onLoadingSwipeRefresh("");
 
                     Toast.makeText(MainActivity.this, "news refreshed if already in news tab", Toast.LENGTH_SHORT).show();
                 }
@@ -183,6 +185,15 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
 
     public void LoadJason(final String keyword) {
+
+        if (keyword != ""){
+            topHeadline.setText("Search results for: " +keyword);
+        } else {
+            topHeadline.setText("Top Headlines");
+
+        }
+
+
 
         errorLayout.setVisibility(View.GONE);
 
@@ -335,6 +346,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
 
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+
+
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if(query.length() > 2) {
@@ -343,14 +357,33 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                     onLoadingSwipeRefresh(query);
 
+                    Query = query;
                 }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                Query = newText;
 
-//                LoadJason(newText);
+
+
+
+
+               if (newText != null){
+
+                   LoadJason(newText);
+
+
+
+               } else {
+                   LoadJason("");
+
+               }
+
+
+
+
                 return false;
             }
         });
@@ -360,23 +393,45 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         searchMenuItem.getIcon().setVisible(false, false);
 
 
+
         return true;
+
+
+
     }
 
     @Override
     public void onRefresh() {
-        topHeadline.setText("Top Headlines");
 
-    LoadJason("");
+
+        if(Query != null){
+            LoadJason(Query);
+        }else
+
+            LoadJason("");
+            topHeadline.setText("Top Headlines");
+
+
     }
 
     private void onLoadingSwipeRefresh(final String keyword) {
+
+
 
         swipeRefreshLayout.post(
                 new Runnable() {
                     @Override
                     public void run() {
-                        LoadJason(keyword);
+
+                        if (keyword == "") {
+
+                            LoadJason("");
+                            topHeadline.setText("Top Headlines");
+                        }
+
+                        else {
+                            LoadJason(keyword);}
+
                     }
                 }
 
