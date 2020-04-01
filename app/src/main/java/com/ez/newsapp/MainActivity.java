@@ -188,9 +188,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         if (keyword != ""){
             topHeadline.setText("Search results for: " +keyword);
-        } else {
-            topHeadline.setText("Top Headlines");
+        } else
 
+            {
+            topHeadline.setText("Top Headlines");
         }
 
 
@@ -426,7 +427,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                         if (keyword == "") {
 
                             LoadJason("");
-                            topHeadline.setText("Top Headlines");
+
                         }
 
                         else {
