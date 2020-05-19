@@ -14,7 +14,7 @@
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/errorImage"
-        android:src="@drawable/no_result"
+        android:src="@mipmap/new_news_icon_foreground"
         android:layout_marginTop="70dp">
 
     </ImageView>

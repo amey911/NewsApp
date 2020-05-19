@@ -16,14 +16,11 @@ public class Utils {
 
     public static ColorDrawable[] vibrantLightColorList =
             {
-                    new ColorDrawable(Color.parseColor("#ffeead")),
-                    new ColorDrawable(Color.parseColor("#93cfb3")),
-                    new ColorDrawable(Color.parseColor("#fd7a7a")),
-                    new ColorDrawable(Color.parseColor("#faca5f")),
-                    new ColorDrawable(Color.parseColor("#1ba798")),
-                    new ColorDrawable(Color.parseColor("#6aa9ae")),
-                    new ColorDrawable(Color.parseColor("#ffbf27")),
-                    new ColorDrawable(Color.parseColor("#d93947"))
+                    new ColorDrawable(Color.parseColor("#e0edff")),
+                    new ColorDrawable(Color.parseColor("#88bbfc")),
+                    new ColorDrawable(Color.parseColor("#3890ff")),
+                    new ColorDrawable(Color.parseColor("#0069ed"))
+
             };
 
     public static ColorDrawable getRandomDrawbleColor() {
@@ -62,13 +59,13 @@ public class Utils {
 
     public static String getCountry(){
         Locale locale = Locale.getDefault();
-        String country = String.valueOf(locale.getCountry());
+        String country = locale.getCountry();
         return country.toLowerCase();
     }
 
     public static String getLanguage(){
         Locale locale = Locale.getDefault();
-        String country = String.valueOf(locale.getLanguage());
+        String country = locale.getLanguage();
         return country.toLowerCase();
     }
 }

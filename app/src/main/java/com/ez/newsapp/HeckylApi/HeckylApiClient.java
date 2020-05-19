@@ -1,4 +1,4 @@
-package com.ez.newsapp.Api;
+package com.ez.newsapp.HeckylApi;
 
 import java.security.cert.CertificateException;
 
@@ -13,21 +13,25 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ApiClient {
+public class HeckylApiClient {
 
-    public static final String BASE_URL = "http://newsapi.org/v2/" ;
+    public static final String BASE_URL = "http://216.185.108.228/Find1Svc/API/JSON/News.svc/" ;
+
+    public static final String API_URL = "http://216.185.108.228/Find1Svc/API/JSON/News.svc/GetLatestTrendingNews?asset=1&entitytype=ISIN&entitycode=INE009A01021&lft=1448843117&sortby=1";
+
     public static Retrofit retrofit;
 
-    public static Retrofit getApiClient() {
-
-        if (retrofit == null){
+    public static Retrofit getApiClient(){
+        if (retrofit == null ) {
             retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
                     .client(getUnsafeOkHttpClient().build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
+
         return retrofit;
     }
+
     public  static OkHttpClient.Builder getUnsafeOkHttpClient() {
         try {
             // Create a trust manager that does not validate certificate chains
@@ -62,4 +66,8 @@ public class ApiClient {
             return builder;
         } catch (Exception e) {
             throw new RuntimeException(e); } }
+
+
+
+
 }

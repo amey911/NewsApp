@@ -162,7 +162,6 @@ public class NewsDetailActivity extends AppCompatActivity implements AppBarLayou
         getMenuInflater().inflate(R.menu.menu_news, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -179,7 +178,7 @@ public class NewsDetailActivity extends AppCompatActivity implements AppBarLayou
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("text/plan");
                 i.putExtra(Intent.EXTRA_SUBJECT, mSource);
-                String body = mTitle + "\n" + mUrl + "\n" + "Share from the NewsApp" + "\n";
+                String body = mTitle + "\n" + mUrl + "\n" + "Share from the HeckylNews" + "\n";
                 i.putExtra(Intent.EXTRA_TEXT, body);
                 startActivity(Intent.createChooser(i, "Share with :"));
 

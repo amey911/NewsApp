@@ -22,6 +22,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.ez.newsapp.Fragments.NewsFragment;
 import com.ez.newsapp.Models.Article;
 
 import java.util.List;
@@ -41,11 +42,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
         this.context = context;
     }
 
+
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item, parent, false);
-//        return new MyViewHolder(view, onItemClickListener);
+
 
         return new MyViewHolder(view, onItemClickListener);
     }
@@ -83,8 +86,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
         holder.title.setText(model.getTitle());
         holder.desc.setText(model.getDescription());
-//        holder.source.setText(model.getSource().getName());
-
         holder.source.setText(model.getSource().getName());
 
 

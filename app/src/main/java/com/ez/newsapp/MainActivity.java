@@ -1,6 +1,7 @@
 package com.ez.newsapp;
 
 import androidx.annotation.IdRes;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityOptionsCompat;
@@ -16,6 +17,8 @@ import android.app.DownloadManager;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -50,7 +53,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-    public  static final String API_KEY = "09803f739fe4493396c5456cfa410330 ";
+    public  static final String API_KEY = " 09803f739fe4493396c5456cfa410330 ";
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -74,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
 
 
-
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottom_bar);
 
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                     // inflate market fragment
 
-                  Toast.makeText(MainActivity.this, "open markets window", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "open markets window", Toast.LENGTH_SHORT).show();
 
                 }
                 else if (tabId == R.id.tab_watchlist) {
@@ -117,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     topHeadline.setText("Top Headlines");
 
 
-                onLoadingSwipeRefresh(Query);
+                    onLoadingSwipeRefresh(Query);
 
 
                     Toast.makeText(MainActivity.this, "news refreshed if already in news tab", Toast.LENGTH_SHORT).show();
@@ -144,12 +146,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
 
 
-    swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
-    swipeRefreshLayout.setOnRefreshListener(this);
-    swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
 
-    topHeadline = findViewById(R.id.topHeadlines);
+        topHeadline = findViewById(R.id.topHeadlines);
 
         recyclerView = findViewById(R.id.main_rec_view);
 //        layoutManager = new LinearLayoutManager(MainActivity.this);
@@ -190,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             topHeadline.setText("Search results for: " +keyword);
         } else
 
-            {
+        {
             topHeadline.setText("Top Headlines");
         }
 
@@ -198,10 +200,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         errorLayout.setVisibility(View.GONE);
 
-        topHeadline.setVisibility(View.INVISIBLE);
+//        topHeadline.setVisibility(View.INVISIBLE);
         swipeRefreshLayout.setRefreshing(true);
 
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+
+
 
         String country = Utils.getCountry();
         String language = Utils.getLanguage();
@@ -260,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                         default:
                             errorCode = "unknown error";
-                                    break;
+                            break;
 
 
                     }
@@ -268,7 +272,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                     showErrorMessage(R.drawable.no_result,
                             "No Result" , "Please Try Again\n"+
-                            errorCode);
+                                    errorCode);
 
                 }
 
@@ -315,11 +319,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                         MainActivity.this,
                         pair
                 );
-
-
-
                 startActivity(intent, optionsCompat.toBundle());
-
             }
         });
     }
@@ -342,19 +342,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setQueryHint("Search Latest News...");
 
-
-
-
-
-                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-
-
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if(query.length() > 2) {
 
-                   topHeadline.setText("Search Results For: " +query);
+                    topHeadline.setText("Search Results For: " +query);
 
                     onLoadingSwipeRefresh(query);
 
@@ -366,39 +359,18 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             @Override
             public boolean onQueryTextChange(String newText) {
                 Query = newText;
+                if (newText != null){
 
+                    LoadJason(newText);
+                } else {
+                    LoadJason("");
 
-
-
-
-               if (newText != null){
-
-                   LoadJason(newText);
-
-
-
-               } else {
-                   LoadJason("");
-
-               }
-
-
-
-
+                }
                 return false;
             }
         });
-
-
-
         searchMenuItem.getIcon().setVisible(false, false);
-
-
-
         return true;
-
-
-
     }
 
     @Override
@@ -410,7 +382,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         }else
 
             LoadJason("");
-            topHeadline.setText("Top Headlines");
+        topHeadline.setText("Top Headlines");
 
 
     }
@@ -440,7 +412,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
 
-private  void showErrorMessage( int imageView , String title , String message  ) {
+    private  void showErrorMessage( int imageView , String title , String message  ) {
 
         if (errorLayout.getVisibility() == View.GONE) {
             errorLayout.setVisibility(View.VISIBLE);
@@ -460,7 +432,7 @@ private  void showErrorMessage( int imageView , String title , String message  )
 
 
 
-}
+    }
 
 
 }

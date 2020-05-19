@@ -59,6 +59,7 @@
                     android:layout_height="80dp"
                     android:layout_alignBottom="@id/img2"
                     android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="-1dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/bottom_shadow" />
 
