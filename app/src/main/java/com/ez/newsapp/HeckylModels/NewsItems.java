@@ -91,8 +91,7 @@ public class NewsItems {
     @Expose
     private String uniqueGuid;
 
-    public NewsItems(String categorys, String channel, String clusterId, String description, String entityCode, String entityType, String imageUrl, String isInTitle, String lastFetch, String lastFetchTicks, String link, String name, String sentiment, String source, String sourceMapId, String title, String titleCnt, String uniqueGuid) {
-    }
+
 
 
     public List<Categorys> getCategorys() {

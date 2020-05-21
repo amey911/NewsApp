@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.ez.newsapp.Activities.ExampleMain;
+//import com.ez.newsapp.Activities.ExampleMain;
+import com.ez.newsapp.Activities.TestActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                Intent homeIntent = new Intent (SplashActivity.this, ExampleMain.class);
+                Intent homeIntent = new Intent (SplashActivity.this, TestActivity.class);
                 startActivity(homeIntent);
                 finish();
             }

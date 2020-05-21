@@ -13,7 +13,7 @@ import retrofit2.http.Query;
 public interface HeckylInterface {
 
 @GET("GetLatestTrendingNews")
-    Call<HeckylNews> getHeckylNews(
+    Call<HeckylNews> getNews(
 
         @Query("asset") int asset,
         @Query("entitytype") String entityType,
@@ -22,8 +22,6 @@ public interface HeckylInterface {
         @Query("sortby") int sortBy
 
         );
-
-
 
 
 
