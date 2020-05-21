@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ez.newsapp" >
+    package="com.ez.newsapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,8 +10,10 @@
         android:label="HeckylNews"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".SplashActivity" >
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activities.ExampleMain"></activity>
+        <activity android:name=".HeckylActivity" />
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +23,7 @@
         <activity
             android:name=".NewsDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity" >
+        <activity android:name=".MainActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -30,13 +32,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".MainActivity2" >
-        </activity>
-
-        <activity
-            android:name=".HeckylMainActivity">
-        </activity>
-
+        <activity android:name=".MainActivity2" />
     </application>
 
 </manifest>
