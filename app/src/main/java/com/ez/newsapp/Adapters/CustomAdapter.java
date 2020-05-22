@@ -5,11 +5,11 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,38 +22,40 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.ez.newsapp.HeckylModels.HeckylNews;
+import com.ez.newsapp.HeckylActivity;
 import com.ez.newsapp.HeckylModels.NewsItems;
 import com.ez.newsapp.R;
 import com.ez.newsapp.Utils;
 
 import java.util.List;
 
-public class HeckylAdapter extends RecyclerView.Adapter<HeckylAdapter.HeckylViewHolder> {
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HeckylViewHolder> {
 
-    private List<NewsItems> newsItems;
+    private List<NewsItems> mNewsItems;
     private Context context;
     private static OnItemClickListener onItemClickListener;
 
 
-    public HeckylAdapter(List<NewsItems> newsItems, Context context) {
-        this.newsItems = newsItems;
+    public CustomAdapter(List<NewsItems> mNewsItems, Context context) {
+        this.mNewsItems = mNewsItems;
         this.context = context;
     }
 
     @NonNull
     @Override
     public HeckylViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item, parent, false);
-        return new HeckylViewHolder(view, onItemClickListener);
+        View v = LayoutInflater.from(context).inflate(R.layout.item, parent, false);
 
+
+        return new HeckylViewHolder(v, onItemClickListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final HeckylViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HeckylViewHolder holders, int position) {
 
-        final HeckylViewHolder heckylViewHolder = holder;
-        NewsItems item = newsItems.get(position);
+    final HeckylViewHolder holder = holders;
+
+    NewsItems model = mNewsItems.get(position);
 
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.placeholder(Utils.getRandomDrawbleColor());
@@ -61,36 +63,36 @@ public class HeckylAdapter extends RecyclerView.Adapter<HeckylAdapter.HeckylView
         requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
         requestOptions.centerCrop();
 
-        Glide.with(context)
-                .load(item.getImgUrl())
-                .apply(requestOptions)
-                .listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        holder.progressBar.setVisibility(View.GONE);
-                        return false;
-                    }
+//        Glide.with(context)
+//                .load(model.getImgUrl())
+//                .apply(requestOptions)
+//                .listener(new RequestListener<Drawable>() {
+//                    @Override
+//                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+//                        holder.progressBar.setVisibility(View.GONE);
+//                        return false;
+//                    }
+//
+//                    @Override
+//                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+//                        holder.progressBar.setVisibility(View.GONE);
+//                        return false;
+//                    }
+//                })
+//                .transition(DrawableTransitionOptions.withCrossFade())
+//                .into(holder.imageView);
 
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        holder.progressBar.setVisibility(View.GONE);
-                        return false;
-                    }
-                })
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(holder.imageView);
-
-        holder.title.setText(item.getTitle());
-        holder.desc.setText(item.getDescription());
-        holder.source.setText(item.getSource());
+        holder.title.setText(model.getTitle());
+        holder.desc.setText(model.getDescription());
+        holder.source.setText(model.getSource());
+        holder.author.setText(model.getName());
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mNewsItems.size();
     }
-
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener){
         this.onItemClickListener = onItemClickListener;
@@ -98,18 +100,22 @@ public class HeckylAdapter extends RecyclerView.Adapter<HeckylAdapter.HeckylView
     }
 
 
+
     public interface OnItemClickListener {
 
-         void OnItemClick(View view, int position);
+        void OnItemClick(View view, int position);
     }
 
 
-    public class HeckylViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView title, desc, source;
+    public class HeckylViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+
+        TextView title, desc, source, author;
         ImageView imageView;
         ProgressBar progressBar;
         OnItemClickListener onItemClickListener;
+
 
 
         public HeckylViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
@@ -119,18 +125,19 @@ public class HeckylAdapter extends RecyclerView.Adapter<HeckylAdapter.HeckylView
             title = itemView.findViewById(R.id.title);
             desc = itemView.findViewById(R.id.desc);
             source = itemView.findViewById(R.id.source);
+            author = itemView.findViewById(R.id.author);
 
             progressBar = itemView.findViewById(R.id.progress_load_photo);
 
-            this.onItemClickListener = HeckylAdapter.onItemClickListener;
+            this.onItemClickListener = CustomAdapter.onItemClickListener;
 
         }
 
         @Override
         public void onClick(View v) {
             onItemClickListener.OnItemClick(v, getAdapterPosition());
-
         }
     }
+
 
 }

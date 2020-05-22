@@ -1,10 +1,6 @@
 package com.ez.newsapp.HeckylApi;
 
 import com.ez.newsapp.HeckylModels.HeckylNews;
-import com.ez.newsapp.HeckylModels.NewsItems;
-import com.ez.newsapp.Models.News;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -15,11 +11,11 @@ public interface HeckylInterface {
 @GET("GetLatestTrendingNews")
     Call<HeckylNews> getNews(
 
-        @Query("asset") int asset,
+        @Query("asset") String asset,
         @Query("entitytype") String entityType,
         @Query("entitycode") String entityCode,
-        @Query("lft") int lft,
-        @Query("sortby") int sortBy
+        @Query("lft") String lft,
+        @Query("sortby") String sortBy
 
         );
 

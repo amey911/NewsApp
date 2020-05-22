@@ -60,7 +60,7 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:scrollbars="vertical"
-                            android:id="@+id/main_rec_view"
+                            android:id="@+id/heckmain_rec_view"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 

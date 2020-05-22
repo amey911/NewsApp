@@ -91,8 +91,26 @@ public class NewsItems {
     @Expose
     private String uniqueGuid;
 
-
-
+    public NewsItems(List<Categorys> categorys, String channel, String clusterID, String description, String entityCode, String entitiyType, String imgUrl, String isInTitle, String lastFetch, String lastFetchTicks, String link, String name, String sentiment, String source, String sourceMapId, String title, String titleCnt, String uniqueGuid) {
+        this.categorys = categorys;
+        this.channel = channel;
+        this.clusterID = clusterID;
+        this.description = description;
+        this.entityCode = entityCode;
+        this.entitiyType = entitiyType;
+        this.imgUrl = imgUrl;
+        IsInTitle = isInTitle;
+        this.lastFetch = lastFetch;
+        this.lastFetchTicks = lastFetchTicks;
+        this.link = link;
+        this.name = name;
+        this.sentiment = sentiment;
+        this.source = source;
+        this.sourceMapId = sourceMapId;
+        this.title = title;
+        this.titleCnt = titleCnt;
+        this.uniqueGuid = uniqueGuid;
+    }
 
     public List<Categorys> getCategorys() {
         return categorys;

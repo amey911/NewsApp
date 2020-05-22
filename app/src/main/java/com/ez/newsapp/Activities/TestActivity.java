@@ -39,7 +39,7 @@ public class TestActivity extends AppCompatActivity {
 
         HeckylInterface heckylInterfaceTest = testRetrofit.create(HeckylInterface.class);
 
-        final Call<HeckylNews> callTest = heckylInterfaceTest.getNews(1, "ISIN", "INE009A01021", 0, 2);
+        final Call<HeckylNews> callTest = heckylInterfaceTest.getNews("1", "ISIN", "INE009A01021", "0", "1");
 
 
         callTest.enqueue(new Callback<HeckylNews>() {
@@ -71,31 +71,7 @@ public class TestActivity extends AppCompatActivity {
             }
         });
 
-//        callTest.enqueue(new Callback<HeckylNews>) {
-//            @Override
-//            public void onResponse(Call<HeckylNews> call, Response<HeckylNews> response) {
-//                if (!response.isSuccessful()) {
-////                    textView.setText("code " + response.code());
-//                    return;
-//                }
-//
-////                List<HeckylNews> NewsTest = (List<HeckylNews>) response.body();
-//               HeckylNews NewsItemTest = (HeckylNews) response.body();
-//                String content = "";
-//
-//                for (NewsItems news : NewsItemTest.getNewsItems()) {
-//                    content += "Title " + news.getTitle() + "\n";
-//                    content += "description" + news.getDescription();
-//
-//                    textView.append(content);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<HeckylNews> call, Throwable t) {
-//            textView.setText(t.getMessage());
-//            }
-//        });
+
 
 
 
