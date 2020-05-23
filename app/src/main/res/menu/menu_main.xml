@@ -15,6 +15,210 @@
 
     </item>
 
+
+    <item
+        android:id="@+id/item_trending"
+        android:orderInCategory="100"
+        android:title="Sort By Trending"
+        app:showAsAction="never">
+
+        </item>
+
+    <item
+        android:id="@+id/item_latest"
+        android:orderInCategory="100"
+        android:title="Sort By Latest"
+        app:showAsAction="never">
+
+    </item>
+
+    <item
+        android:id="@+id/menu_region"
+        android:title="Regions">
+
+        <menu>
+            <group android:id="@+id/Regions"
+                android:checkableBehavior="single"
+
+                >
+
+                <item
+                    android:title="Australia"
+                    android:id="@+id/region_australia">
+
+
+                </item>
+
+                <item
+                    android:title="Hong Kong"
+                    android:id="@+id/region_hongkong">
+
+                </item>
+
+                <item
+                    android:title="India"
+                    android:id="@+id/region_india">
+
+                </item>
+
+                <item
+                    android:title="Indonesia"
+                    android:id="@+id/region_indonesia">
+
+                </item>
+
+                <item
+                    android:title="Malaysia"
+                    android:id="@+id/region_malaysia">
+
+                </item>
+
+                <item
+                    android:title="Singapore"
+                    android:id="@+id/region_singapore">
+
+                </item>
+
+                <item
+                    android:title="United Kingdom"
+                    android:id="@+id/region_uk">
+
+                </item>
+
+
+
+                <item
+                    android:title="United States"
+                    android:id="@+id/region_us">
+
+                </item>
+
+                <item
+                    android:title="Belgium"
+                    android:id="@+id/region_belgium">
+
+                </item>
+
+                <item
+                    android:title="Canada"
+                    android:id="@+id/region_canada">
+
+                </item>
+
+                <item
+                    android:title="China"
+                    android:id="@+id/region_china">
+
+                </item>
+
+                <item
+                    android:title="Denmark"
+                    android:id="@+id/region_denmark">
+
+                </item>
+
+                <item
+                    android:title="Finland"
+                    android:id="@+id/region_finland">
+
+                </item>
+
+                <item
+                    android:title="Iceland"
+                    android:id="@+id/region_iceland">
+
+                </item>
+
+                <item
+                    android:title="Italy"
+                    android:id="@+id/region_italy">
+
+                </item>
+
+                <item
+                    android:title="Japan"
+                    android:id="@+id/region_japan">
+
+                </item>
+
+                <item
+                    android:title="Netherlands"
+                    android:id="@+id/region_netherlands">
+
+                </item>
+
+                <item
+                    android:title="Norway"
+                    android:id="@+id/region_norway">
+
+                </item>
+
+                <item
+                    android:title="Poland"
+                    android:id="@+id/region_poland">
+
+                </item>
+
+                <item
+                    android:title="Portugal"
+                    android:id="@+id/region_portugal">
+
+                </item>
+
+
+                <item
+                    android:title="Russia"
+                    android:id="@+id/region_russia">
+
+                </item>
+
+
+                <item
+                    android:title="South Korea"
+                    android:id="@+id/region_southkorea">
+
+                </item>
+
+
+                <item
+                    android:title="Spain"
+                    android:id="@+id/region_spain">
+
+                </item>
+
+
+
+                <item
+                    android:title="Sweden"
+                    android:id="@+id/region_sweden">
+
+                </item>
+
+
+
+                <item
+                    android:title="Switzerland"
+                    android:id="@+id/region_switzerland">
+
+                </item>
+
+
+                <item
+                    android:title="Germany"
+                    android:id="@+id/region_germany">
+
+                </item>
+
+
+
+            </group>
+
+        </menu>
+
+    </item>
+
+
+
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

@@ -19,7 +19,15 @@ public interface HeckylInterface {
 
         );
 
+    @GET("GetLatestNews")
+    Call<HeckylNews> getRegionNews(
 
+            @Query("asset") String asset,
+            @Query("lft") String lft,
+            @Query("countryid") String countryid
+
+
+    );
 
 
 }
