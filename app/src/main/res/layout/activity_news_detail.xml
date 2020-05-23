@@ -230,14 +230,14 @@
             android:src="@drawable/ic_date" />
 
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="27dp"
-            android:layout_marginRight="10dp"
-            android:text="01 January 1990"
-            android:textColor="#606060" />
+<!--        <TextView-->
+<!--            android:id="@+id/date"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="27dp"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:text="01 January 1990"-->
+<!--            android:textColor="#606060" />-->
 
 
     </FrameLayout>

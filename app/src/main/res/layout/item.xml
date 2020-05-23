@@ -81,25 +81,25 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="-50dp">
 
-                <ImageView
-                    android:src="@drawable/ic_date"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp">
+<!--                <ImageView-->
+<!--                    android:src="@drawable/ic_date"-->
+<!--                    android:layout_width="18dp"-->
+<!--                    android:layout_height="18dp"-->
+<!--                    android:layout_marginLeft="5dp"-->
+<!--                    android:layout_marginRight="5dp">-->
 
-                </ImageView>
+<!--                </ImageView>-->
 
-                <TextView
-                    android:textColor="#606060"
-                    android:id="@+id/publishedAt"
-                    android:layout_marginLeft="27dp"
-                    android:layout_marginRight="10dp"
-                    android:text="01 January 1990"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+<!--                <TextView-->
+<!--                    android:textColor="#606060"-->
+<!--                    android:id="@+id/publishedAt"-->
+<!--                    android:layout_marginLeft="27dp"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:text="01 January 1990"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content">-->
 
-                </TextView>
+<!--                </TextView>-->
 
 
             </FrameLayout>

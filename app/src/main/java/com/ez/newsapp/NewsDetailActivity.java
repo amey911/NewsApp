@@ -64,17 +64,17 @@ public class NewsDetailActivity extends AppCompatActivity implements AppBarLayou
         appbar_title = findViewById(R.id.title_on_appbar);
         appbar_subtitle = findViewById(R.id.subtitle_on_appbar);
 
-
-        date = findViewById(R.id.date);
-        time = findViewById(R.id.time);
-        title = findViewById(R.id.title);
+//
+//        date = findViewById(R.id.date);
+//        time = findViewById(R.id.time);
+//        title = findViewById(R.id.title);
 
 
         Intent intent = getIntent();
         mUrl = intent.getStringExtra("url");
-        mImg = intent.getStringExtra("img");
+//        mImg = intent.getStringExtra("img");
         mTitle = intent.getStringExtra("title");
-        mdate = intent.getStringExtra("date");
+//        mdate = intent.getStringExtra("date");
         mSource = intent.getStringExtra("source");
         mAuthor = intent.getStringExtra("author");
 
@@ -82,16 +82,16 @@ public class NewsDetailActivity extends AppCompatActivity implements AppBarLayou
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.error(Utils.getRandomDrawbleColor());
 
-        Glide.with(this)
-                .load(mImg)
-                .apply(requestOptions)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(imageView);
+//        Glide.with(this)
+//                .load(mImg)
+//                .apply(requestOptions)
+//                .transition(DrawableTransitionOptions.withCrossFade())
+//                .into(imageView);
 
-        appbar_title.setText(mSource);
+//        appbar_title.setText(mTitle);
         appbar_subtitle.setText(mUrl);
-        date.setText(Utils.DateFormat(mdate));
-        title.setText(mTitle);
+//        date.setText(Utils.DateFormat(mdate));
+        appbar_title.setText(mTitle);
 
         String author = null;
 
@@ -101,7 +101,7 @@ public class NewsDetailActivity extends AppCompatActivity implements AppBarLayou
             author = "";
         }
 
-        time.setText(mSource + author + " \u2022 " + Utils.DateToTimeFormat(mdate));
+//        time.setText(mSource + author + " \u2022 " + Utils.DateToTimeFormat(mdate));
 
         initeWebView(mUrl);
 
