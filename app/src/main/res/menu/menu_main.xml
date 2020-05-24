@@ -34,7 +34,9 @@
 
     <item
         android:id="@+id/menu_region"
-        android:title="Regions">
+        android:title="Regions"
+
+        >
 
         <menu>
             <group android:id="@+id/Regions"

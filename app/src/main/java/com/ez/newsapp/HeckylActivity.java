@@ -58,6 +58,9 @@ public class HeckylActivity extends AppCompatActivity implements SwipeRefreshLay
 
     // COUNTRY CODES :
 
+    private static String sortByLatest = "1";
+    private static String sortbyTrending = "2" ;
+
 
 
 
@@ -111,17 +114,21 @@ public class HeckylActivity extends AppCompatActivity implements SwipeRefreshLay
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+
         switch (item.getItemId())
         {
+
             case R.id.item_latest:
                 sortby = "1";
 
-                LoadNewsLatest();
+                LoadNewsLatestTrending(sortByLatest);
                 break;
 
             case R.id.item_trending:
                 sortby = "2";
-                LoadNewsTredning();
+
+                LoadNewsLatestTrending(sortbyTrending);
                 break;
         }
 
@@ -130,37 +137,44 @@ public class HeckylActivity extends AppCompatActivity implements SwipeRefreshLay
             case R.id.region_australia:
 
 
-
+                item.setChecked(true);
                 LoadRegionNews("16");
 
                 break;
 
             case R.id.region_hongkong:
                 LoadRegionNews("92");
+                item.setChecked(true);
                 break;
 
             case R.id.region_india:
                 LoadRegionNews("1");
+                item.setChecked(true);
                 break;
 
             case R.id.region_indonesia:
                 LoadRegionNews("95");
+                item.setChecked(true);
                 break;
 
                 case R.id.region_malaysia:
                     LoadRegionNews("122");
+                    item.setChecked(true);
                 break;
 
             case R.id.region_singapore:
                 LoadRegionNews("181");
+                item.setChecked(true);
                 break;
 
             case R.id.region_uk :
                 LoadRegionNews("211");
+                item.setChecked(true);
                 break;
 
             case R.id.region_us:
                 LoadRegionNews("2");
+                item.setChecked(true);
 
                 break;
 
@@ -171,88 +185,89 @@ public class HeckylActivity extends AppCompatActivity implements SwipeRefreshLay
 
             case R.id.region_canada:
                 LoadRegionNews("3");
+                item.setChecked(true);
 
                 break;
 
             case R.id.region_china:
                 LoadRegionNews("45");
-
+                item.setChecked(true);
                 break;
 
             case R.id.region_denmark:
                 LoadRegionNews("57");
-
+                item.setChecked(true);
                 break;
 
             case R.id.region_finland:
                 LoadRegionNews("70");
-
+                item.setChecked(true);
                 break;
 
             case R.id.region_iceland:
                 LoadRegionNews("94");
-
+                item.setChecked(true);
                 break;
 
             case R.id.region_italy:
                 LoadRegionNews("100");
-
+                item.setChecked(true);
                 break;
 
             case R.id.region_japan:
                 LoadRegionNews("102");
-
+                item.setChecked(true);
                 break;
 
             case R.id.region_netherlands:
                 LoadRegionNews("145");
-
+                item.setChecked(true);
                 break;
 
 
             case R.id.region_norway:
                 LoadRegionNews("151");
-
+                item.setChecked(true);
                 break;
 
             case R.id.region_poland:
                 LoadRegionNews("161");
-
+                item.setChecked(true);
                 break;
 
             case R.id.region_portugal:
                 LoadRegionNews("162");
-
+                item.setChecked(true);
                 break;
 
             case R.id.region_russia:
                 LoadRegionNews("167");
-
+                item.setChecked(true);
                 break;
 
             case R.id.region_southkorea:
                 LoadRegionNews("187");
-
+                item.setChecked(true);
                 break;
 
             case R.id.region_spain:
                 LoadRegionNews("188");
-
+                item.setChecked(true);
                 break;
 
             case R.id.region_sweden:
                 LoadRegionNews("193");
-
+                item.setChecked(true);
                 break;
 
             case R.id.region_switzerland:
                 LoadRegionNews("194");
-
+                item.setChecked(true);
                 break;
 
             case R.id.region_germany:
                 LoadRegionNews("78");
-
+                item.setChecked(true);
                 break;
 
         }
@@ -270,17 +285,28 @@ public class HeckylActivity extends AppCompatActivity implements SwipeRefreshLay
 
 
 
-    public void LoadNewsLatest() {
+    public void LoadNewsLatestTrending(final String sortKey) {
 
-        topHeadline.setText("Latest News");
-        topHeadline.setVisibility(View.VISIBLE);
+        if (sortKey == "1") {
+            sortby = "1";
+            topHeadline.setText("Latest News");
+            topHeadline.setVisibility(View.VISIBLE);
+
+        } else {
+            topHeadline.setText("Trending News");
+            topHeadline.setVisibility(View.VISIBLE);
+
+            sortby = "2";
+        }
+
+
         swipeRefreshLayout.setRefreshing(true);
 
         HeckylInterface heckylInterface = HeckylApiClient.getApiClient().create(HeckylInterface.class);
 
         Call<HeckylNews> call;
 
-        call = heckylInterface.getNews(asset, entitiytype, entitycode, lft, sortby);
+        call = heckylInterface.getNews(asset, entitiytype, entitycode, lft, sortKey);
 
          call.enqueue(new Callback<HeckylNews>() {
              @Override
@@ -326,54 +352,6 @@ public class HeckylActivity extends AppCompatActivity implements SwipeRefreshLay
 
 
 
-    public void LoadNewsTredning() {
-        topHeadline.setText("Trending News");
-        topHeadline.setVisibility(View.VISIBLE);
-        swipeRefreshLayout.setRefreshing(true);
-
-        HeckylInterface heckylInterface = HeckylApiClient.getApiClient().create(HeckylInterface.class);
-
-        Call<HeckylNews> call;
-
-        call = heckylInterface.getNews(asset, entitiytype, entitycode, lft, sortby);
-
-        call.enqueue(new Callback<HeckylNews>() {
-            @Override
-            public void onResponse(Call<HeckylNews> call, Response<HeckylNews> response) {
-                if (response.isSuccessful() && response.body().getNewsItems() !=null){
-
-                    if (newsItems.isEmpty()){
-                        newsItems.clear();
-                    }
-
-                    newsItems = response.body().getNewsItems();
-                    heckylAdapter = new CustomAdapter(newsItems, HeckylActivity.this);
-                    heckylRecView.setAdapter(heckylAdapter);
-                    heckylAdapter.notifyDataSetChanged();
-
-                    initListener();
-
-
-//                    topHeadline.setVisibility(View.INVISIBLE);
-                    swipeRefreshLayout.setRefreshing(false);
-
-                }else {
-//                    topHeadline.setVisibility(View.INVISIBLE);
-                    swipeRefreshLayout.setRefreshing(false);
-
-                    Toast.makeText(HeckylActivity.this, "No Result!", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<HeckylNews> call, Throwable t) {
-
-            }
-        });
-
-
-
-    }
 
 
 
@@ -478,9 +456,9 @@ public class HeckylActivity extends AppCompatActivity implements SwipeRefreshLay
     public void onRefresh() {
 
         if (sortby == "1"){
-            LoadNewsLatest();
+            LoadNewsLatestTrending(sortbyTrending);
         } else {
-            LoadNewsTredning();
+            LoadNewsLatestTrending(sortByLatest);
         }
 
 
@@ -493,9 +471,9 @@ public class HeckylActivity extends AppCompatActivity implements SwipeRefreshLay
                     @Override
                     public void run() {
                         if (sortby == "1"){
-                            LoadNewsLatest();
+                            LoadNewsLatestTrending(sortByLatest);
                         } else {
-                            LoadNewsTredning();
+                            LoadNewsLatestTrending(sortbyTrending);
                         }
                     }
                 }
