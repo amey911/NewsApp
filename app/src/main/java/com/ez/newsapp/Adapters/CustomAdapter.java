@@ -63,30 +63,38 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HeckylView
         requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
         requestOptions.centerCrop();
 
-//        Glide.with(context)
-//                .load(model.getImgUrl())
-//                .apply(requestOptions)
-//                .listener(new RequestListener<Drawable>() {
-//                    @Override
-//                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-//                        holder.progressBar.setVisibility(View.GONE);
-//                        return false;
-//                    }
-//
-//                    @Override
-//                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-//                        holder.progressBar.setVisibility(View.GONE);
-//                        return false;
-//                    }
-//                })
-//                .transition(DrawableTransitionOptions.withCrossFade())
-//                .into(holder.imageView);
+        if (model.getImgUrl() != null){
 
-        holder.title.setText(model.getTitle());
+            Glide.with(context)
+                    .load(model.getImgUrl())
+                    .apply(requestOptions)
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            holder.progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            holder.progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(holder.imageView);
+
+
+
+        } else {
+
+        }
+
+
+            holder.title.setText(model.getTitle());
         holder.desc.setText(model.getDescription());
         holder.source.setText(model.getSource());
         holder.author.setText(model.getName());
-
     }
 
     @Override

@@ -2,7 +2,9 @@ package com.ez.newsapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityOptionsCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +39,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HeckylActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+
+    private DrawerLayout drawerLayout;
 
 
     private RecyclerView heckylRecView;
@@ -77,6 +81,15 @@ public class HeckylActivity extends AppCompatActivity implements SwipeRefreshLay
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heckyl);
 
+
+
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+
+
+
+
+
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
@@ -93,14 +106,16 @@ public class HeckylActivity extends AppCompatActivity implements SwipeRefreshLay
         topHeadline = findViewById(R.id.topHeadlines);
 
 
-
-
        onLoadingSwipeRefresh();
+
+
 
 //        LoadNewsLatest();
 
 
     }
+
+
 
 
     @Override
@@ -334,6 +349,8 @@ public class HeckylActivity extends AppCompatActivity implements SwipeRefreshLay
 
         Call<HeckylNews> call;
 
+//        call = heckylInterface.getNews("1", "BSE", "0", lft, sortKey);
+
         call = heckylInterface.getNews(asset, entitiytype, entitycode, lft, sortKey);
 
          call.enqueue(new Callback<HeckylNews>() {
@@ -407,7 +424,11 @@ public class HeckylActivity extends AppCompatActivity implements SwipeRefreshLay
 
     public void LoadRegionNews(final String RegionCode) {
 
-//        topHeadline.setText("Latest News of Region" +RegionCode);
+
+
+
+
+
 
 
         swipeRefreshLayout.setRefreshing(true);

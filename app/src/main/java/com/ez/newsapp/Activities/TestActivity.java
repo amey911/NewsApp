@@ -1,6 +1,10 @@
 package com.ez.newsapp.Activities;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -23,6 +27,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TestActivity extends AppCompatActivity {
 
+    DrawerLayout drawerLayout;
+
     private TextView textView;
 
     @Override
@@ -30,50 +36,27 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-        textView = findViewById(R.id.textVIew1);
+        Toolbar toolbar = findViewById(R.id.test_toolbar);
+        setSupportActionBar(toolbar);
 
-        Retrofit testRetrofit = new Retrofit.Builder()
-                .baseUrl("http://216.185.108.228/Find1Svc/API/JSON/News.svc/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        drawerLayout = findViewById(R.id.test_drawer_layout);
 
-        HeckylInterface heckylInterfaceTest = testRetrofit.create(HeckylInterface.class);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
-        final Call<HeckylNews> callTest = heckylInterfaceTest.getNews("1", "ISIN", "INE009A01021", "0", "1");
-
-
-        callTest.enqueue(new Callback<HeckylNews>() {
-            @Override
-            public void onResponse(Call<HeckylNews> call, Response<HeckylNews> response) {
-
-                if (!response.isSuccessful()) {
-                    textView.setText("code"+response.code());
-                    return;
-                }
-
-                HeckylNews newsTest =  response.body();
-                String content = "";
-
-                for (NewsItems news : newsTest.getNewsItems()) {
-                    content += "Title " + news.getTitle();
-                    content += "Description " + news.getDescription();
-                    content += "source " +news.getSource();
-
-                    textView.append(content);
-                }
-
-            }
-
-
-            @Override
-            public void onFailure(Call<HeckylNews> call, Throwable t) {
-                textView.setText(t.getMessage());
-            }
-        });
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
 
 
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }else {
+            super.onBackPressed();
+        }
     }
 }
