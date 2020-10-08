@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.ez.newsapp.Activities.HeckylHome;
+import com.ez.newsapp.Activities.HomeActivity;
+import com.ez.newsapp.Activities.MediaActivity;
+import com.ez.newsapp.Activities.NewsListActivity;
 import com.ez.newsapp.Activities.TestActivity;
 
 //import com.ez.newsapp.Activities.ExampleMain;
@@ -27,9 +31,11 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                Intent homeIntent = new Intent (SplashActivity.this, TestActivity.class);
+
+                Intent homeIntent = new Intent (SplashActivity.this, HeckylHome.class);
                 startActivity(homeIntent);
                 finish();
+
             }
 
         },SPLASH_TIME_OUT);

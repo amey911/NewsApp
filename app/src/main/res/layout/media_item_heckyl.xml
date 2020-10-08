@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+
+
+    android:layout_margin="5dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="10dp"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/media_item_bg"
+            >
+
+
+            <ImageView
+                android:id="@+id/play_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_play_arrow_black_24dp"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true">
+
+            </ImageView>
+
+
+            <TextView
+                android:id="@+id/meida_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/play_image"
+                android:text="Title"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                >
+
+            </TextView>
+
+
+            <TextView
+                android:id="@+id/meida_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/meida_item_title"
+                android:text="NAme"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:textSize="15dp"
+                >
+
+            </TextView>
+
+
+
+
+            <TextView
+                android:id="@+id/meida_item_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/meida_item_name"
+                android:text="NAme"
+                android:layout_marginLeft="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="10dp"
+                android:textSize="16dp"
+                >
+
+            </TextView>
+
+
+
+
+
+
+
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</FrameLayout>

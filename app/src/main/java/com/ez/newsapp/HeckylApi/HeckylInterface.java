@@ -64,7 +64,7 @@ public interface HeckylInterface {
     );
 
     @GET("GetSentimentTimeSeries")
-    Call<Sentiment> getSentimentTimeeSeries(
+    Call<Sentiment> getSentimentTimeSeries(
 
            @Query("asset") String asset,
            @Query("entitytype") String entityType,

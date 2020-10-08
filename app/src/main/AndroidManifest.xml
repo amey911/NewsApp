@@ -11,12 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.TestActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-
-        <activity android:name=".Activities.ExampleMain" />
-        <activity android:name=".HeckylActivity"></activity>
+        <activity android:name=".Activities.NewsListActivity"></activity>
+        <activity android:name=".Activities.HeckylHome" />
+        <activity android:name=".Activities.MediaActivity" />
+        <activity
+            android:name=".Activities.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.TestActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".HeckylActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,21 +31,6 @@
         <activity
             android:name=".NewsDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
-        <activity android:name=".MainActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity android:name=".MainActivity2" />
-
-
-
     </application>
 
 </manifest>

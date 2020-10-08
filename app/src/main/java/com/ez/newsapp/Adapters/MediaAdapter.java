@@ -1,46 +1,27 @@
 package com.ez.newsapp.Adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
-import com.ez.newsapp.HeckylActivity;
 import com.ez.newsapp.HeckylModels.NewsItems;
 import com.ez.newsapp.R;
-import com.ez.newsapp.Utils;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HeckylViewHolder> {
+public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.HeckylViewHolder> {
 
     private List<NewsItems> mNewsItems;
     private Context context;
     private static OnItemClickListener onItemClickListener;
 
 
-    public CustomAdapter(List<NewsItems> mNewsItems, Context context) {
+    public MediaAdapter(List<NewsItems> mNewsItems, Context context) {
         this.mNewsItems = mNewsItems;
         this.context = context;
     }
@@ -48,7 +29,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HeckylView
     @NonNull
     @Override
     public HeckylViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.news_item_heckyl, parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.media_item_heckyl, parent, false);
 
 
         return new HeckylViewHolder(v, onItemClickListener);
@@ -57,19 +38,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HeckylView
     @Override
     public void onBindViewHolder(@NonNull HeckylViewHolder holders, int position) {
 
-    final HeckylViewHolder holder = holders;
+        final HeckylViewHolder holder = holders;
 
-    NewsItems model = mNewsItems.get(position);
+        NewsItems model = mNewsItems.get(position);
 
 
         holder.title.setText(model.getTitle());
-        holder.source.setText(model.getSource());
-        holder.desc.setText(model.getDescription());
+        holder.name.setText(model.getName());
+
 
         String unixdate = model.getLastFetch();
 
-
-
+        holder.date.setText(unixdate);
 
 
 
@@ -97,8 +77,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HeckylView
     public class HeckylViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
 
-        TextView title, desc, source, date;
-//        ImageView imageView;
+        TextView title, name,  date;
+        //        ImageView imageView;
 //        ProgressBar progressBar;
         OnItemClickListener onItemClickListener;
 
@@ -118,14 +98,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HeckylView
 
             itemView.setOnClickListener(this);
 
-            title = itemView.findViewById(R.id.news_item_title);
-            desc = itemView.findViewById(R.id.news_item_desc);
-            source = itemView.findViewById(R.id.news_item_src);
-            date = itemView.findViewById(R.id.news_item_date);
+            title = itemView.findViewById(R.id.meida_item_title);
+            name = itemView.findViewById(R.id.meida_item_name);
+            date = itemView.findViewById(R.id.meida_item_date);
 
 
 
-            this.onItemClickListener = CustomAdapter.onItemClickListener;
+            this.onItemClickListener = onItemClickListener;
 
         }
 

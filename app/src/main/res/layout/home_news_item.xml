@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/news_item_bg_small"
+
+            >
+
+
+            <TextView
+                android:id="@+id/home_news_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="News heading"
+                android:textSize="14dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold">
+
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/home_news_item_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="News desc"
+                android:textSize="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+
+              >
+
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/home_news_item_src"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="News src"
+                android:textSize="13dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="end"
+                android:layout_marginBottom="5dp"
+                >
+
+
+            </TextView>
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</FrameLayout>

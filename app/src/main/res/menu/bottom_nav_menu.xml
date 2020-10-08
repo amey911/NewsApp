@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/bottom_bar_item_home"
+        android:enabled="true"
+        android:icon="@drawable/home_icon"
+        android:title="Home"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/bottom_bar_item_markets"
+        android:enabled="true"
+        android:icon="@drawable/stock_icon"
+        android:title="Markets"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/bottom_bar_item_media"
+        android:enabled="true"
+        android:icon="@drawable/ic_play_arrow_black_24dp"
+        android:title="Media"
+        app:showAsAction="ifRoom" />
+
+
+    <item
+        android:id="@+id/bottom_bar_item_menu"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_black_24dp"
+        android:title="Menu"
+        app:showAsAction="ifRoom" />
+
+
+</menu>

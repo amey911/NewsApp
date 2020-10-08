@@ -190,4 +190,8 @@ public class NewsDetailActivity extends AppCompatActivity implements AppBarLayou
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
 }
