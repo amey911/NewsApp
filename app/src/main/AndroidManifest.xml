@@ -10,7 +10,8 @@
         android:label="HeckylNews"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity android:name=".Activities.NewsListActivity"></activity>
         <activity android:name=".Activities.HeckylHome" />
         <activity android:name=".Activities.MediaActivity" />

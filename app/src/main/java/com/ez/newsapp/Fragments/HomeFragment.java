@@ -1,10 +1,16 @@
 package com.ez.newsapp.Fragments;
 
+import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,9 +22,13 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
+import com.ez.newsapp.Activities.HeckylHome;
 import com.ez.newsapp.Activities.HomeActivity;
+import com.ez.newsapp.Activities.NewsListActivity;
 import com.ez.newsapp.Adapters.HomeNewsAdapter;
+import com.ez.newsapp.Adapters.SwipeAdapter;
 import com.ez.newsapp.HeckylApi.HeckylApiClient;
 import com.ez.newsapp.HeckylApi.HeckylInterface;
 import com.ez.newsapp.HeckylModels.HeckylNews;
@@ -50,7 +60,20 @@ public class HomeFragment extends Fragment {
 
     String responseLft = "0";
 
+
     private RecyclerView.LayoutManager layoutManager;
+
+    Spinner homeRegionSpinner;
+
+
+
+    ViewPager viewPager;
+    SwipeAdapter swipeAdapter;
+    Integer[] colors = null;
+    List<NewsItems> swipeItems;
+    ArgbEvaluator argbEvaluator = new ArgbEvaluator();
+
+
 
     TextView viewAllTopNews;
 
@@ -62,14 +85,27 @@ public class HomeFragment extends Fragment {
        View view = inflater.inflate(R.layout.fragment_home, container,false);
 
 
+
+
+
+        viewAllTopNews = view.findViewById(R.id.heckylhome_top_news_view_all);
         heckylHomeTopNewsRec = view.findViewById(R.id.heckylhome_top_rec_view);
         heckylRegionNewsRec = view.findViewById(R.id.heckylhome_region_news_rec);
 
+        homeRegionSpinner = view.findViewById(R.id.home_region_spinner);
+
+
+        ArrayAdapter<String> regionAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_dropdown_item, getResources()
+                .getStringArray(R.array.regions));
+
+        regionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        homeRegionSpinner.setAdapter(regionAdapter);
+
+
+
 
         layoutManager = new LinearLayoutManager(getActivity());
-
-
-
         TopNewsAdapter = new HomeNewsAdapter(topNewsItems, getActivity());
 
         heckylHomeTopNewsRec.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -92,6 +128,154 @@ public class HomeFragment extends Fragment {
 
 
 
+        viewAllTopNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent homeIntent = new Intent (getActivity(), NewsListActivity.class);
+                startActivity(homeIntent);
+
+
+            }
+        });
+
+
+
+
+        homeRegionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+                switch (position){
+
+                    case 0:
+                    LoadRegionNews("1");
+                    break;
+
+                    case 1:
+                        LoadRegionNews("16");
+                        break;
+
+                    case 2:
+                        LoadRegionNews("92");
+                        break;
+
+
+                    case 3:
+                        LoadRegionNews("95");
+                        break;
+
+
+                    case 4:
+                        LoadRegionNews("122");
+                        break;
+
+
+                    case 5:
+                        LoadRegionNews("181");
+                        break;
+
+
+                    case 6:
+                        LoadRegionNews("211");
+                        break;
+
+
+                    case 7:
+                        LoadRegionNews("2");
+                        break;
+
+
+                    case 8:
+                        LoadRegionNews("24");
+                        break;
+
+                    case 9:
+                        LoadRegionNews("3");
+                        break;
+
+                    case 10:
+                        LoadRegionNews("45");
+                        break;
+
+                    case 11:
+                        LoadRegionNews("57");
+                        break;
+
+                    case 12:
+                        LoadRegionNews("70");
+                        break;
+
+                    case 13:
+                        LoadRegionNews("94");
+                        break;
+
+
+                    case 14:
+                        LoadRegionNews("100");
+                        break;
+
+                    case 15:
+                        LoadRegionNews("102");
+                        break;
+
+
+                    case 16:
+                        LoadRegionNews("142");
+                        break;
+
+                    case 17:
+                        LoadRegionNews("151");
+                        break;
+
+                    case 18:
+                        LoadRegionNews("161");
+                        break;
+
+                    case 19:
+                        LoadRegionNews("162");
+                        break;
+
+                    case 20:
+                        LoadRegionNews("167");
+                        break;
+
+                    case 21:
+                        LoadRegionNews("187");
+                        break;
+
+                    case 22:
+                        LoadRegionNews("188");
+                        break;
+
+                    case 23:
+                        LoadRegionNews("193");
+                        break;
+
+                    case 24:
+                        LoadRegionNews("194");
+                        break;
+
+                    case 25:
+                        LoadRegionNews("78");
+                        break;
+
+
+
+
+                }
+
+
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
 
@@ -124,23 +308,26 @@ public class HomeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final FragmentActivity c = getActivity();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
 
-                c.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        LoadTopNews("1", "ISIN", "US38259P7069|US0378331005|INE009A01021", "0", "2");
+        LoadTopNews("1", "ISIN", "US38259P7069|US0378331005|INE009A01021", "0", "2");
+        LoadRegionNews("1");
 
-                        LoadRegionNews("1");
+//        final FragmentActivity c = getActivity();
 
-                    }
-                });
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                c.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//
+//                    }
+//                });
+//            }
+//        }).start();
 
     }
 
@@ -271,7 +458,7 @@ public class HomeFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        LoadTopNews("1", "ISIN", "US38259P7069|US0378331005|INE009A01021", "0", "2");
+
 
     }
 

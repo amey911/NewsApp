@@ -23,6 +23,7 @@ import com.ez.newsapp.HeckylModels.HeckylNews;
 import com.ez.newsapp.HeckylModels.NewsItems;
 import com.ez.newsapp.NewsDetailActivity;
 import com.ez.newsapp.R;
+import com.ez.newsapp.SplashActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 
-        viewAllTopNews = findViewById(R.id.home_top_news_view_all);
+//        viewAllTopNews = findViewById(R.id.home_top_news_view_all);
 
 
         HomeTopNewsRec = findViewById(R.id.home_top_rec_view);
@@ -105,6 +106,8 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Toast.makeText(HomeActivity.this, "View all news", Toast.LENGTH_SHORT).show();
+
+
 
             }
         });

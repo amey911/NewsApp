@@ -38,6 +38,7 @@ public class HeckylHome extends AppCompatActivity {
                     Fragment selectedFragment = null;
                     switch (menuItem.getItemId()) {
 
+
                         case R.id.bottom_bar_item_home :
                             selectedFragment = new HomeFragment();
                             break;

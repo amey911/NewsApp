@@ -47,6 +47,7 @@ public class MediaFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    LinearLayoutManager linearLayoutManager;
 
     String responseLft = "";
 
@@ -63,11 +64,14 @@ public class MediaFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
         mediaRecView = view.findViewById(R.id.media_rec_view_frag);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_media_frag);
-        swipeRefreshLayout.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) this);
+        swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
-        layoutManager = new LinearLayoutManager(getActivity());
-        mediaRecView.setLayoutManager(layoutManager);
+//        layoutManager = new LinearLayoutManager(getActivity());
+
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+
+        mediaRecView.setLayoutManager(linearLayoutManager);
         mediaRecView.setItemAnimator(new DefaultItemAnimator());
         mediaRecView.setNestedScrollingEnabled(false);
         mediaRecView.hasFixedSize();
@@ -75,12 +79,20 @@ public class MediaFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
 
 
-
         LoadMedia("0");
+
 
         return view;
 
     }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        LoadMedia("0");
+    }
+
     private void LoadMedia(String lft)
     {
 

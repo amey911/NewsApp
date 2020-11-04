@@ -157,7 +157,7 @@ public class NewsListActivity extends AppCompatActivity {
 
 
                    newsListAdapter = new CustomAdapter(newsItems, NewsListActivity.this);
-                   newsListRec.setLayoutManager(layoutManager);
+
                    newsListRec.setAdapter(newsListAdapter);
                    newsListRec.setHasFixedSize(true);
                    newsListAdapter.notifyDataSetChanged();
