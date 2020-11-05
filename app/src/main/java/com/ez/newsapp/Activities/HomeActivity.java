@@ -76,6 +76,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
+
                     case R.id.bottom_bar_item_home:
                         Toast.makeText(HomeActivity.this, "HOME", Toast.LENGTH_SHORT).show();
                         break;
@@ -96,8 +97,8 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-
         LoadTopNews("1", "ISIN", "US38259P7069|US0378331005", responseLft, "2");
+
 
 
 

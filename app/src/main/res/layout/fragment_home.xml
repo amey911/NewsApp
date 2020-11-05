@@ -32,6 +32,8 @@
 
 
 
+
+
             <LinearLayout
                 android:id="@+id/top_news_layout"
                 android:layout_width="match_parent"
@@ -118,8 +120,12 @@
 
 
 
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/sentiment_chart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp">
 
-
+            </com.github.mikephil.charting.charts.LineChart>
 
 
 
@@ -128,7 +134,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="200dp">
+                android:layout_marginTop="20dp">
 
 
                 <RelativeLayout

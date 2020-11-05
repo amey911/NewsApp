@@ -3,6 +3,7 @@ package com.ez.newsapp.Fragments;
 import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,13 +29,21 @@ import com.ez.newsapp.Activities.HeckylHome;
 import com.ez.newsapp.Activities.HomeActivity;
 import com.ez.newsapp.Activities.NewsListActivity;
 import com.ez.newsapp.Adapters.HomeNewsAdapter;
+import com.ez.newsapp.Adapters.SentimentsSwipeAdapter;
 import com.ez.newsapp.Adapters.SwipeAdapter;
 import com.ez.newsapp.HeckylApi.HeckylApiClient;
 import com.ez.newsapp.HeckylApi.HeckylInterface;
+import com.ez.newsapp.HeckylModels.EntitySentiments;
 import com.ez.newsapp.HeckylModels.HeckylNews;
 import com.ez.newsapp.HeckylModels.NewsItems;
+import com.ez.newsapp.HeckylModels.Sentiment;
 import com.ez.newsapp.NewsDetailActivity;
 import com.ez.newsapp.R;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -47,11 +56,13 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
 
 
-
     private RecyclerView heckylHomeTopNewsRec, heckylRegionNewsRec;
 
     private List<NewsItems> topNewsItems = new ArrayList<>();
     private List<NewsItems> regionNewsItems = new ArrayList<>();
+
+
+
 
     private HomeNewsAdapter TopNewsAdapter;
     private HomeNewsAdapter regionNewsAdapter;
@@ -66,31 +77,58 @@ public class HomeFragment extends Fragment {
     Spinner homeRegionSpinner;
 
 
-
     ViewPager viewPager;
     SwipeAdapter swipeAdapter;
     Integer[] colors = null;
     List<NewsItems> swipeItems;
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
 
+    ViewPager sentimentViewPager;
+    SentimentsSwipeAdapter sentimentAdapter;
+    private List<EntitySentiments> sentiments = new ArrayList<>();
+
+
+    LineChart sentimentChart;
 
 
     TextView viewAllTopNews;
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.fragment_home, container,false);
-
-
-
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
 
         viewAllTopNews = view.findViewById(R.id.heckylhome_top_news_view_all);
         heckylHomeTopNewsRec = view.findViewById(R.id.heckylhome_top_rec_view);
         heckylRegionNewsRec = view.findViewById(R.id.heckylhome_region_news_rec);
+
+        sentimentChart = view.findViewById(R.id.sentiment_chart);
+
+
+        LineDataSet lineDataSet = new LineDataSet(sentimentsValues(), "sentimentSet1");
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(lineDataSet);
+
+        LineData data = new LineData(dataSets);
+
+        sentimentChart.setData(data);
+        sentimentChart.invalidate();
+
+        viewPager = view.findViewById(R.id.news_viewpager);
+
+
+
+        Integer[] color_temp = {getResources().getColor(R.color.navy),
+                getResources().getColor(R.color.cyan),
+                getResources().getColor(R.color.blue),
+                getResources().getColor(R.color.aqua)
+        };
+
+
+        colors = color_temp;
+
 
         homeRegionSpinner = view.findViewById(R.id.home_region_spinner);
 
@@ -101,8 +139,6 @@ public class HomeFragment extends Fragment {
 
         regionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         homeRegionSpinner.setAdapter(regionAdapter);
-
-
 
 
         layoutManager = new LinearLayoutManager(getActivity());
@@ -124,15 +160,11 @@ public class HomeFragment extends Fragment {
         heckylRegionNewsRec.setHasFixedSize(true);
 
 
-
-
-
-
         viewAllTopNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent homeIntent = new Intent (getActivity(), NewsListActivity.class);
+                Intent homeIntent = new Intent(getActivity(), NewsListActivity.class);
                 startActivity(homeIntent);
 
 
@@ -140,18 +172,16 @@ public class HomeFragment extends Fragment {
         });
 
 
-
-
         homeRegionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
 
-                switch (position){
+                switch (position) {
 
                     case 0:
-                    LoadRegionNews("1");
-                    break;
+                        LoadRegionNews("1");
+                        break;
 
                     case 1:
                         LoadRegionNews("16");
@@ -262,11 +292,7 @@ public class HomeFragment extends Fragment {
                         break;
 
 
-
-
                 }
-
-
 
 
             }
@@ -280,11 +306,10 @@ public class HomeFragment extends Fragment {
 
 
 
+
         return view;
 
     }
-
-
 
 
     @Override
@@ -292,16 +317,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-
-
-
-
-
     }
-
-
-
-
 
 
     @Override
@@ -309,9 +325,10 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
 
-
         LoadTopNews("1", "ISIN", "US38259P7069|US0378331005|INE009A01021", "0", "2");
         LoadRegionNews("1");
+        LoadSentiments("1", "ISIN", "US38259P7069|US0378331005");
+
 
 //        final FragmentActivity c = getActivity();
 
@@ -333,23 +350,99 @@ public class HomeFragment extends Fragment {
 
 
 
+private ArrayList<Entry> sentimentsValues()
+{
 
-    private void LoadTopNews(final String asset , final String entityType, final String entityCodeList, final String lft, final String sortKey)
+        ArrayList<Entry> sentiVals = new ArrayList<Entry>();
+
+        sentiVals.add(new Entry(0, 20));
+    sentiVals.add(new Entry(1, 23));
+    sentiVals.add(new Entry(2, 25));
+    sentiVals.add(new Entry(3, 26));
+    sentiVals.add(new Entry(4, 28));
+
+
+    return sentiVals;
+}
+
+
+
+
+
+
+
+
+    private void LoadSentiments(String asset, String entityType, String entityCode)
     {
+        HeckylInterface heckylInterface = HeckylApiClient.getApiClient().create(HeckylInterface.class);
+
+        Call<Sentiment> sentimentCall;
+
+        sentimentCall = heckylInterface.getSentimentTimeSeries(asset, entityType, entityCode);
+
+
+        sentimentCall.enqueue(new Callback<Sentiment>() {
+            @Override
+            public void onResponse(Call<Sentiment> call, Response<Sentiment> response) {
+
+
+
+                if (response.isSuccessful() && response.body().getEntitySentiments() != null) {
+
+                    if (sentiments.isEmpty()) {
+                        sentiments.clear();
+
+
+                        sentiments = response.body().getEntitySentiments();
+
+                        Log.e("TAG", "onResponse: " + sentiments.get(0));
+
+
+
+
+
+
+                    }
+
+
+                } else
+
+                    {
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Sentiment> call, Throwable t) {
+
+            }
+        });
+
+
+
+    }
+
+
+
+
+
+    private void LoadTopNews(final String asset, final String entityType, final String entityCodeList, final String lft, final String sortKey) {
 // for list of companies
 
         HeckylInterface heckylInterface = HeckylApiClient.getApiClient().create(HeckylInterface.class);
 
         Call<HeckylNews> callTopNews;
 
-        callTopNews = heckylInterface.getNewsForEntities(asset, entityType, entityCodeList,newsCount, lft, sortKey);
+        callTopNews = heckylInterface.getNewsForEntities(asset, entityType, entityCodeList, newsCount, lft, sortKey);
 
         callTopNews.enqueue(new Callback<HeckylNews>() {
             @Override
             public void onResponse(Call<HeckylNews> call, Response<HeckylNews> response) {
 
 
-                if (response.isSuccessful() && response.body().getNewsItems() !=null) {
+                if (response.isSuccessful() && response.body().getNewsItems() != null) {
 
                     if (topNewsItems.isEmpty()) {
                         topNewsItems.clear();
@@ -359,20 +452,57 @@ public class HomeFragment extends Fragment {
                     responseLft = response.body().getLft();
 
 
+
                     TopNewsAdapter = new HomeNewsAdapter(topNewsItems, getActivity());
                     heckylHomeTopNewsRec.setLayoutManager(layoutManager);
                     heckylHomeTopNewsRec.setAdapter(TopNewsAdapter);
                     TopNewsAdapter.notifyDataSetChanged();
 
-
-
-
-
                     initListener();
 
+                    swipeItems = response.body().getNewsItems();
+                    swipeAdapter = new SwipeAdapter(swipeItems, getActivity());
+                    viewPager.setAdapter(swipeAdapter);
+                    viewPager.setPadding(130, 0, 130, 0);
 
-                }
-                else {
+
+                    viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                            if (position< (swipeAdapter.getCount() -1) && position < (colors.length -1))
+                            {
+                                viewPager.setBackgroundColor((Integer)argbEvaluator.evaluate(
+                                        positionOffset,
+                                        colors[position],
+                                        colors[position + 1]
+                                )
+
+                                );
+
+
+                            }
+                            else
+                            {
+                                viewPager.setBackgroundColor(colors[colors.length -1]);
+                            }
+                        }
+
+                        @Override
+                        public void onPageSelected(int position) {
+
+                        }
+
+                        @Override
+                        public void onPageScrollStateChanged(int state) {
+
+                        }
+                    });
+
+
+
+
+
+                } else {
 
 
                 }
@@ -387,13 +517,7 @@ public class HomeFragment extends Fragment {
         });
 
 
-
-
     }
-
-
-
-
 
 
     public void LoadRegionNews(final String RegionCode) {
@@ -409,7 +533,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<HeckylNews> call, Response<HeckylNews> response) {
 
-                if (response.isSuccessful() && response.body().getNewsItems() !=null){
+                if (response.isSuccessful() && response.body().getNewsItems() != null) {
 
                     if (regionNewsItems.isEmpty()) {
                         regionNewsItems.clear();
@@ -421,11 +545,6 @@ public class HomeFragment extends Fragment {
                     heckylRegionNewsRec.setAdapter(regionNewsAdapter);
                     heckylHomeTopNewsRec.setHasFixedSize(true);
                     regionNewsAdapter.notifyDataSetChanged();
-
-
-
-
-
 
 
                 }
@@ -442,16 +561,11 @@ public class HomeFragment extends Fragment {
     }
 
 
-
-    private void LoadCategories()
-    {
+    private void LoadCategories() {
         HeckylInterface heckylInterface = HeckylApiClient.getApiClient().create(HeckylInterface.class);
 
 
     }
-
-
-
 
 
     @Override
@@ -459,10 +573,7 @@ public class HomeFragment extends Fragment {
         super.onStart();
 
 
-
     }
-
-
 
 
     private void initListener() {
@@ -482,9 +593,6 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
-
-
 
 
 }

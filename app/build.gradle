@@ -23,6 +23,11 @@ android {
 
 }
 
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -82,5 +87,11 @@ dependencies {
     implementation 'com.android.support:design:27.0.2'
     //noinspection GradleCompatible
     implementation 'com.android.support:support-v4:27.0.2'
+
+
+    //Chart library
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 
 }

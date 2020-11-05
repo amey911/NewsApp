@@ -9,27 +9,31 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
-import com.ez.newsapp.HeckylModels.NewsItems;
+import com.ez.newsapp.HeckylModels.EntitySentiments;
 import com.ez.newsapp.R;
 
 import java.util.List;
 
-public class SwipeAdapter extends PagerAdapter {
+public class SentimentsSwipeAdapter extends PagerAdapter {
+//    private List<NewsItems> swipeItems;
+//    private LayoutInflater layoutInflater;
+//    private Context context;
 
-private List<NewsItems> swipeItems;
-private LayoutInflater layoutInflater;
-private Context context;
+    private List<EntitySentiments> entitySentiments;
+    private LayoutInflater layoutInflater;
+    private Context context;
 
-    public SwipeAdapter(List<NewsItems> swipeItems, Context context) {
-        this.swipeItems = swipeItems;
+
+    public SentimentsSwipeAdapter(List<EntitySentiments> entitySentiments, Context context) {
+        this.entitySentiments = entitySentiments;
         this.context = context;
     }
 
+
     @Override
     public int getCount() {
-        return swipeItems.size();
+        return entitySentiments.size();
     }
 
     @Override
@@ -40,10 +44,12 @@ private Context context;
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
+
         layoutInflater = layoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.swipe_item, container, false);
 
-        ImageView sImageView;
+
+
         TextView sTitle, sDesc, sDate;
 
         sTitle = view.findViewById(R.id.swipe_item_title);
@@ -51,18 +57,13 @@ private Context context;
         sDate = view.findViewById(R.id.swipe_item_date);
 
 
-        sTitle.setText(swipeItems.get(position).getTitle());
-        sDesc.setText(swipeItems.get(position).getDescription());
-        sDate.setText(swipeItems.get(position).getLastFetch());
+        sTitle.setText(entitySentiments.get(position).getEntitiyCode());
+        sDesc.setText(entitySentiments.get(position).getEntityType());
+        sDate.setText(entitySentiments.get(position).getPositiveNegative());
 
         container.addView(view, 0);
 
 
         return view;
-    }
-
-    @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-//        super.destroyItem(container, position, object);
     }
 }
