@@ -93,6 +93,7 @@ public class HomeFragment extends Fragment {
 
     TextView viewAllTopNews;
 
+    TextView sentimentNegative;
 
     @Nullable
     @Override
@@ -104,7 +105,11 @@ public class HomeFragment extends Fragment {
         heckylHomeTopNewsRec = view.findViewById(R.id.heckylhome_top_rec_view);
         heckylRegionNewsRec = view.findViewById(R.id.heckylhome_region_news_rec);
 
+
         sentimentChart = view.findViewById(R.id.sentiment_chart);
+
+
+        sentimentNegative = view.findViewById(R.id.sentiment_negative);
 
 
         LineDataSet lineDataSet = new LineDataSet(sentimentsValues(), "sentimentSet1");
@@ -120,10 +125,11 @@ public class HomeFragment extends Fragment {
 
 
 
-        Integer[] color_temp = {getResources().getColor(R.color.navy),
-                getResources().getColor(R.color.cyan),
-                getResources().getColor(R.color.blue),
-                getResources().getColor(R.color.aqua)
+        Integer[] color_temp = {getResources().getColor(R.color.darkpurple),
+
+//                getResources().getColor(R.color.darkpurple),
+//                getResources().getColor(R.color.purple),
+
         };
 
 
@@ -327,24 +333,10 @@ public class HomeFragment extends Fragment {
 
         LoadTopNews("1", "ISIN", "US38259P7069|US0378331005|INE009A01021", "0", "2");
         LoadRegionNews("1");
-        LoadSentiments("1", "ISIN", "US38259P7069|US0378331005");
+        LoadEntitySentiments();
+//        LoadSentiments("1", "ISIN", "US38259P7069|US0378331005");
 
 
-//        final FragmentActivity c = getActivity();
-
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                c.runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//
-//                    }
-//                });
-//            }
-//        }).start();
 
     }
 
@@ -367,6 +359,55 @@ private ArrayList<Entry> sentimentsValues()
 
 
 
+
+
+
+
+    private void LoadEntitySentiments() {
+        HeckylInterface heckylInterface = HeckylApiClient.getApiClient().create(HeckylInterface.class);
+
+        Call<Sentiment> sentimentCall;
+
+        sentimentCall = heckylInterface.getEntitySentiments("1", "ISIN", "INE009A01021");
+
+        sentimentCall.enqueue(new Callback<Sentiment>() {
+            @Override
+            public void onResponse(Call<Sentiment> call, Response<Sentiment> response) {
+
+                if (response.isSuccessful() && response.body().getEntitySentiments() != null) {
+
+                    if (sentiments.isEmpty()) {
+                        sentiments.clear();
+
+
+                        sentiments = response.body().getEntitySentiments();
+
+                        sentimentNegative.setText(sentiments.get(0).getNegative());
+
+
+
+
+
+
+
+                    }
+
+
+                } else
+
+                {
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Sentiment> call, Throwable t) {
+
+            }
+        });
+
+    }
 
 
 

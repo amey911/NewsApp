@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.HeckylLoginActivity"
+    android:background="#E5EAF7">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_login_screen"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp">
+
+    </ImageView>
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/login_et_linear_layout"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email or Phone No."
+            android:layout_marginLeft="40dp"
+            android:textStyle="bold"
+
+            >
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/login_et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="email or phone here"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="17dp"
+            android:background="@drawable/text_field_purple">
+
+        </EditText>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password."
+            android:layout_marginLeft="40dp"
+            android:textStyle="bold"
+
+            >
+
+        </TextView>
+        <EditText
+            android:id="@+id/login_et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="passowrd here"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="17dp"
+            android:background="@drawable/text_field_purple">
+
+        </EditText>
+
+
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_et_linear_layout"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="20dp"
+        android:text="login"
+        android:background="@drawable/btn_purple"
+        >
+
+    </Button>
+
+    <TextView
+        android:id="@+id/login_signup_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Account"
+        android:layout_below="@id/login_btn"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        >
+
+    </TextView>
+
+
+    <ProgressBar
+        android:id="@+id/login_prog_bar"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+    </ProgressBar>
+
+
+</RelativeLayout>

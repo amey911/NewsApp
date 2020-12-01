@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/darkpurple">
 
 
     <ScrollView
@@ -43,6 +44,19 @@
                 >
 
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="TRENDING NEWS with viewpager"
+                    android:textSize="12sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="#ffff"
+                    >
+
+                </TextView>
 
 
                 <androidx.viewpager.widget.ViewPager
@@ -66,19 +80,28 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="20dp"
+                    android:textColor="#ffff"
                     >
 
                 </TextView>
+
+
+
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:id="@+id/heckylhome_top_rec_view"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
+
                     android:scrollbars="vertical"
                     >
                 </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -120,14 +143,6 @@
 
 
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/sentiment_chart"
-                android:layout_width="match_parent"
-                android:layout_height="250dp">
-
-            </com.github.mikephil.charting.charts.LineChart>
-
-
 
 
             <LinearLayout
@@ -151,6 +166,7 @@
 
                         android:layout_marginBottom="10dp"
                         android:layout_marginLeft="20dp"
+                        android:textColor="#ffff"
                         >
 
                     </TextView>
@@ -163,6 +179,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="20dp"
                         android:layout_marginBottom="10dp"
+                        android:textColor="#ffff"
                         >
 
                     </Spinner>
@@ -176,7 +193,6 @@
                     android:layout_height="300dp"
                     android:id="@+id/heckylhome_region_news_rec"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
                     android:scrollbars="vertical"
                     >
                 </androidx.recyclerview.widget.RecyclerView>
@@ -214,6 +230,34 @@
 
 
             </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/sentiment_negative"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sentiment here"
+                android:layout_margin="20dp"
+                android:textColor="#ffff">
+
+            </TextView>
+
+
+
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:id="@+id/sentiment_chart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp">
+
+            </com.github.mikephil.charting.charts.LineChart>
+
+
+
+
 
 
 

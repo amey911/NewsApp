@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 
-    <androidx.cardview.widget.CardView
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/news_item_home_rel_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:layout_height="match_parent"
+        android:background="@drawable/news_rec_item_green">
+
+
+
 
         <LinearLayout
+            android:id="@+id/home_news_item_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/news_item_bg_small"
+
 
             >
+
+
+
 
 
             <TextView
@@ -22,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="News heading"
-                android:textSize="14dp"
+                android:textSize="13dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
@@ -41,7 +54,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
 
-              >
+                >
 
 
             </TextView>
@@ -52,21 +65,31 @@
                 android:layout_height="wrap_content"
                 android:text="News src"
                 android:textSize="13dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginLeft="20dp"
                 android:layout_gravity="end"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="20dp"
                 >
 
 
             </TextView>
 
 
+
+
+
+
         </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
+
+
+
+    </RelativeLayout>
+
+
+
 
 
 </FrameLayout>

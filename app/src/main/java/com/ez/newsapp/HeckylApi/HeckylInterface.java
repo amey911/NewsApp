@@ -34,7 +34,7 @@ public interface HeckylInterface {
     );
 
     @GET("GetLatestEntitySentiment")
-    Call<EntitySentiments> getEntitySentiments(
+    Call<Sentiment> getEntitySentiments(
 
             @Query("asset") String sentimentAsset,
             @Query("entitytype") String sentimentEntityType,

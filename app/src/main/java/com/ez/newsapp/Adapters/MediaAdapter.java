@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,6 +52,30 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.HeckylViewHo
 
         holder.date.setText(unixdate);
 
+        String sentiment = model.getSentiment();
+
+        switch (sentiment) {
+
+            case "0":
+//blue
+//
+                holder.mediaRelative.setBackgroundResource(R.drawable.media_item_blue);
+
+                break;
+
+            case "1":
+//green
+//
+                holder.mediaRelative.setBackgroundResource(R.drawable.media_item_green);
+                break;
+
+            case "2":
+//red
+//
+                holder.mediaRelative.setBackgroundResource(R.drawable.media_item_red);
+                break;
+
+        }
 
 
     }
@@ -81,6 +106,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.HeckylViewHo
         //        ImageView imageView;
 //        ProgressBar progressBar;
         OnItemClickListener onItemClickListener;
+        RelativeLayout mediaRelative;
 
 
 
@@ -101,6 +127,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.HeckylViewHo
             title = itemView.findViewById(R.id.meida_item_title);
             name = itemView.findViewById(R.id.meida_item_name);
             date = itemView.findViewById(R.id.meida_item_date);
+            mediaRelative = itemView.findViewById(R.id.media_item_relative);
 
 
 

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "337761808681",
+    "firebase_url": "https://heckylnews.firebaseio.com",
+    "project_id": "heckylnews",
+    "storage_bucket": "heckylnews.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:337761808681:android:6e1e86bf1b79287b1a4738",
+        "android_client_info": {
+          "package_name": "com.ez.newsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "337761808681-rk4e9cnj01a9cqgbpo2ao42isqf530ac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOLXjNwnt0uPcAQ0CRC_xIlqh6Scr7VP0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "337761808681-rk4e9cnj01a9cqgbpo2ao42isqf530ac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

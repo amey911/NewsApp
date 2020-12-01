@@ -4,6 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,6 +52,32 @@ public class HomeNewsAdapter extends RecyclerView.Adapter<HomeNewsAdapter.Heckyl
 
         String unixdate = model.getLastFetch();
 
+
+
+        String sentiment = model.getSentiment();
+
+        switch (sentiment) {
+
+            case "0":
+//blue
+//                holder.underline.setImageResource(R.drawable.blue_underline);
+                holder.homeItemRelLayout.setBackgroundResource(R.drawable.news_rec_item_neutral);
+
+                break;
+
+            case "1":
+//green
+//                holder.underline.setImageResource(R.drawable.green_underline);
+                holder.homeItemRelLayout.setBackgroundResource(R.drawable.news_rec_item_green);
+                    break;
+
+            case "2":
+//red
+//                holder.underline.setImageResource(R.drawable.red_underline);
+                holder.homeItemRelLayout.setBackgroundResource(R.drawable.new_srec_item_red);
+                break;
+
+        }
 
 
 
@@ -153,6 +182,10 @@ public class HomeNewsAdapter extends RecyclerView.Adapter<HomeNewsAdapter.Heckyl
 
         TextView hTitle, hDesc, hSrc, hDate;
 
+        ImageView underline;
+
+        RelativeLayout homeItemRelLayout;
+
         OnItemClickListener onItemClickListener;
 
 
@@ -165,6 +198,9 @@ public class HomeNewsAdapter extends RecyclerView.Adapter<HomeNewsAdapter.Heckyl
             hTitle = itemView.findViewById(R.id.home_news_item_title);
             hSrc = itemView.findViewById(R.id.home_news_item_src);
             hDesc = itemView.findViewById(R.id.home_news_item_desc);
+            homeItemRelLayout = itemView.findViewById(R.id.news_item_home_rel_layout);
+
+
 
 
             itemView.setOnClickListener(this);

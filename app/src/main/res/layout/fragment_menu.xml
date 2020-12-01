@@ -4,7 +4,49 @@
     android:layout_height="match_parent">
 
 
+<!--  <androidx.recyclerview.widget.RecyclerView-->
+<!--      android:id="@+id/menu_items_rec"-->
+<!--      android:layout_width="match_parent"-->
+<!--      android:layout_height="match_parent">-->
+
+<!--  </androidx.recyclerview.widget.RecyclerView>-->
+
+<Button
+    android:id="@+id/menu_btn_profile"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:text="profile"
+    android:layout_margin="20dp">
+
+</Button>
+
+    <Button
+        android:id="@+id/menu_btn_user_pref"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="company preference"
+        android:layout_below="@id/menu_btn_profile"
+        android:layout_margin="20dp">
+
+    </Button>
 
 
+
+
+
+
+
+
+
+    <Button
+        android:id="@+id/menu_btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="logout"
+        android:layout_margin="20dp"
+        android:layout_alignParentBottom="true">
+
+    </Button>
 
 </RelativeLayout>

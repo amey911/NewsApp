@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.DimenRes;
@@ -69,6 +70,31 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HeckylView
         String unixdate = model.getLastFetch();
 
 
+        String sentiment = model.getSentiment();
+
+
+        switch (sentiment) {
+
+            case "0":
+//blue
+//
+                holder.newsItemRel.setBackgroundResource(R.drawable.news_rec_item_neutral);
+
+                break;
+
+            case "1":
+//green
+//
+                holder.newsItemRel.setBackgroundResource(R.drawable.news_rec_item_green);
+                break;
+
+            case "2":
+//red
+//
+                holder.newsItemRel.setBackgroundResource(R.drawable.new_srec_item_red);
+                break;
+
+        }
 
 
 
@@ -100,6 +126,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HeckylView
         TextView title, desc, source, date;
 //        ImageView imageView;
 //        ProgressBar progressBar;
+        RelativeLayout newsItemRel;
         OnItemClickListener onItemClickListener;
 
 
@@ -122,6 +149,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HeckylView
             desc = itemView.findViewById(R.id.news_item_desc);
             source = itemView.findViewById(R.id.news_item_src);
             date = itemView.findViewById(R.id.news_item_date);
+            newsItemRel = itemView.findViewById(R.id.news_item_relative);
 
 
 

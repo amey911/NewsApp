@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.ez.newsapp.Activities.HeckylHome;
@@ -49,6 +50,8 @@ public class MediaFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
     LinearLayoutManager linearLayoutManager;
 
+    StaggeredGridLayoutManager staggeredGridLayoutManager;
+
     String responseLft = "";
 
 
@@ -70,6 +73,7 @@ public class MediaFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 //        layoutManager = new LinearLayoutManager(getActivity());
 
         linearLayoutManager = new LinearLayoutManager(getActivity());
+        staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 
         mediaRecView.setLayoutManager(linearLayoutManager);
         mediaRecView.setItemAnimator(new DefaultItemAnimator());

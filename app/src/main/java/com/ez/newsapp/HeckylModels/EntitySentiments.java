@@ -18,29 +18,29 @@ public class EntitySentiments {
     @SerializedName("Frequency")
     @Expose
 
-    private String Freq;
+    private int Freq;
 
     @SerializedName("Negative")
     @Expose
 
-    private String Negative;
+    private int Negative;
 
 
     @SerializedName("Neutral")
     @Expose
 
-    private String neutral;
+    private int neutral;
 
 
     @SerializedName("Positive")
     @Expose
 
-    private String positive;
+    private int positive;
 
     @SerializedName("PositiveNegative")
     @Expose
 
-    private String positiveNegative;
+    private int positiveNegative;
 
 
     @SerializedName("PubDate")
@@ -70,43 +70,43 @@ public class EntitySentiments {
         this.entityType = entityType;
     }
 
-    public String getFreq() {
+    public int getFreq() {
         return Freq;
     }
 
-    public void setFreq(String freq) {
+    public void setFreq(int freq) {
         Freq = freq;
     }
 
-    public String getNegative() {
+    public int getNegative() {
         return Negative;
     }
 
-    public void setNegative(String negative) {
+    public void setNegative(int negative) {
         Negative = negative;
     }
 
-    public String getNeutral() {
+    public int getNeutral() {
         return neutral;
     }
 
-    public void setNeutral(String neutral) {
+    public void setNeutral(int neutral) {
         this.neutral = neutral;
     }
 
-    public String getPositive() {
+    public int getPositive() {
         return positive;
     }
 
-    public void setPositive(String positive) {
+    public void setPositive(int positive) {
         this.positive = positive;
     }
 
-    public String getPositiveNegative() {
+    public int getPositiveNegative() {
         return positiveNegative;
     }
 
-    public void setPositiveNegative(String positiveNegative) {
+    public void setPositiveNegative(int positiveNegative) {
         this.positiveNegative = positiveNegative;
     }
 

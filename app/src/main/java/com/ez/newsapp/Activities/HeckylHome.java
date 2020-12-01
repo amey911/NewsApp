@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.ez.newsapp.Fragments.HomeFragment;
 import com.ez.newsapp.Fragments.MarketsFragment;
@@ -18,6 +20,8 @@ public class HeckylHome extends AppCompatActivity {
 
     BottomNavigationView bottomNavHeckylHome;
 
+
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,28 @@ public class HeckylHome extends AppCompatActivity {
 
                 }
             };
+
+
+    @Override
+    public void onBackPressed() {
+
+
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
 
 
 }
